@@ -2,17 +2,23 @@ import Menu.items
 
 object Bill {
 
+  val ZERO_COST: String = "£0.00"
+
   def calculateTotalPrice(menuItems: List[String]): String = {
     if(menuItems.isEmpty) {
-      "£0.00"
+      ZERO_COST
     } else {
-      val menuItemList = createMenuItemList(menuItems)
-      val basePrice = basePriceForMenuItems(menuItemList)
-      val serviceCharge = serviceChargeForMenuItems(menuItemList, basePrice)
-
-      val totalPrice = basePrice + serviceCharge
-      poundsAndPence(totalPrice)
+      calculateCostOfMenuItems(menuItems)
     }
+  }
+
+  def calculateCostOfMenuItems(menuItems: List[String]): String = {
+    val menuItemList = createMenuItemList(menuItems)
+    val basePrice = basePriceForMenuItems(menuItemList)
+    val serviceCharge = serviceChargeForMenuItems(menuItemList, basePrice)
+
+    val totalPrice = basePrice + serviceCharge
+    poundsAndPence(totalPrice)
   }
 
   def basePriceForMenuItems(menuItemList: List[MenuItem]): Int = {
