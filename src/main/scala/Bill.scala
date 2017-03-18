@@ -7,14 +7,42 @@ object Bill {
       "£0.00"
     } else {
       val menuItemList = createMenuItemList(menuItems)
-      val totalPrice = totalPriceForMenuItems(menuItemList)
+      val basePrice = basePriceForMenuItems(menuItemList)
+      val serviceCharge = serviceChargeForMenuItems(menuItemList, basePrice)
 
+      val totalPrice = basePrice + serviceCharge
       poundsAndPence(totalPrice)
     }
   }
 
-  def totalPriceForMenuItems(menuItemList: List[MenuItem]): Int = {
+  def basePriceForMenuItems(menuItemList: List[MenuItem]): Int = {
     menuItemList.foldLeft(0)((acc, menuItem: MenuItem) => menuItem.price + acc)
+  }
+
+  def serviceChargeForMenuItems(menuItemList: List[MenuItem], basePrice: Int): Int = {
+    if(hasAnyHotFood(menuItemList)) {
+      twentyPercent(basePrice)
+    } else if(hasAnyFood(menuItemList)) {
+      tenPercent(basePrice)
+    } else {
+      0
+    }
+  }
+
+  def tenPercent(basePrice: Int): Int = {
+    basePrice / 10
+  }
+
+  def twentyPercent(basePrice: Int): Int = {
+    basePrice / 10 * 2
+  }
+
+  def hasAnyFood(menuItemList: List[MenuItem]): Boolean = {
+    menuItemList.exists(menuItem => menuItem.food)
+  }
+
+  def hasAnyHotFood(menuItemList: List[MenuItem]): Boolean = {
+    menuItemList.exists(menuItem => menuItem.food && menuItem.hot)
   }
 
   def createMenuItemList(menuItems: List[String]): List[MenuItem] = {
