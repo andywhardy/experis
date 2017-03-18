@@ -1,1 +1,1 @@
-case class MenuItem(name: String, hot: Boolean, price: Int)
+case class MenuItem(name: String, hot: Boolean, food: Boolean, price: Int)
