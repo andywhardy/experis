@@ -25,6 +25,6 @@ class MenuItemSpec extends FlatSpec with Matchers {
 
     menuItem.price should be (50)
   }
-  
+
 }
 
