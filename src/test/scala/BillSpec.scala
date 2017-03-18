@@ -1,4 +1,4 @@
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers}
 
 class BillSpec extends FlatSpec with Matchers {
 
