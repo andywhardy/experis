@@ -13,3 +13,4 @@ $ sbt test
 $ git checkout tags/step2
 $ sbt test
 ```
+
